@@ -8,6 +8,7 @@ import SearchIcon from '@material-ui/icons/Search';
 const useStyles = makeStyles({
   root: {
     backgroundColor: '#fff',
+    
   },
   searchInput: {
     opacity: '0.6',
@@ -15,6 +16,9 @@ const useStyles = makeStyles({
     fontSize: '0.8rem',
     '&:hover': {
       backgroundColor: '#f2f2f2'
+    },
+    '& .MuiSvgIcon.root': {
+      marginRight: '8px',
     }
   }
 });
@@ -33,7 +37,7 @@ export default function Header() {
             />
           </Grid>
           <Grid item sm></Grid>
-          <Grid>
+          <Grid item>
             <IconButton>
               <Badge badgeContent={4} color="secondary">
                 <NotificationsNoneIcon />
