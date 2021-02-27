@@ -3,8 +3,7 @@ import { createMuiTheme, CssBaseline, makeStyles, ThemeProvider } from '@materia
 import SideMenu from '../components/SideMenu';
 import './App.css';
 import Header from '../components/Header';
-import PageHeader from '../components/PageHeader';
-import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
+import Employees from '../pages/Employees/Employees';
 
 const theme = createMuiTheme({
   pallete: {
@@ -20,14 +19,16 @@ const theme = createMuiTheme({
       default: "#f4f5fd"
     },
   },
-  shape: {
-    borderRadius: '12px'
-  },
   overrides: {
     MuiAppBar: {
       root: {
         transform: 'translateZ(0)'
       }
+    }
+  },
+  props:{
+    MuiIconButton:{
+      disableRipple:true
     }
   }
 });
@@ -47,11 +48,8 @@ function App() {
       <SideMenu />
       <div className={classes.appMain}>
         <Header />
-        <PageHeader 
-          title="Page header"
-          subTitle="Sample description"
-          icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
-        />
+        
+        <Employees />
       </div>
       <CssBaseline />
     </ThemeProvider>
