@@ -27,7 +27,9 @@ function Employees() {
 
   const {
     TblContainer,
-    TblHeader
+    TblHeader,
+    TblPagination,
+    recordsAfterPagingAndSorting
   } = useTable(records, headCells);
 
   return (
@@ -42,7 +44,7 @@ function Employees() {
         <TblContainer>
           <TblHeader />
           <TableBody>
-            {records.map(
+            {recordsAfterPagingAndSorting().map(
               item => (
                 <TableRow key={item.id}>
                   <TableCell>{item.fullName}</TableCell>
@@ -54,6 +56,7 @@ function Employees() {
             )}
           </TableBody>
         </TblContainer>
+        <TblPagination />
       </Paper>
     </div>
   )
