@@ -33,13 +33,13 @@ function EmployeeForm() {
     if ('mobile' in fieldValues)
       temp.mobile = fieldValues.mobile.length > 9 ? "" : "Minimum 10 numbers required.";
     if ('departmentId' in fieldValues)
-      temp.departmentId = fieldValues.departmentId.length != 0 ? "" : "This field is required.";
+      temp.departmentId = fieldValues.departmentId.length !== 0 ? "" : "This field is required.";
     setErrors({
       ...temp
     });
 
-    if (fieldValues == values)
-      return Object.values(temp).every(x => x == "");
+    if (fieldValues === values)
+      return Object.values(temp).every(x => x === "");
   }
  
   const {
