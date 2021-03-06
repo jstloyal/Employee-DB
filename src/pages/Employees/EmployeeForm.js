@@ -22,7 +22,8 @@ const initialValues = {
   isPermanent: false,
 };
 
-function EmployeeForm() {
+function EmployeeForm(props) {
+  const { addOrEdit } = props;
 
   const validate = (fieldValues = values) => {
     let temp = {...errors};
@@ -53,9 +54,9 @@ function EmployeeForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    if (validate())
-      employeeService.insertEmployee(values);
-      resetForm();
+    if (validate()) {
+      addOrEdit(values, resetForm);
+    }
   }
 
   return (

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import PageHeader from '../../components/PageHeader';
 import EmployeeForm from './EmployeeForm';
 import PeopleOutlineTwoToneIcon from '@material-ui/icons/PeopleOutlineTwoTone';
+import AddIcon from '@material-ui/icons/Add';
 import { InputAdornment, makeStyles, Paper, TableBody, TableCell, TableRow, Toolbar } from '@material-ui/core';
+import { Search } from '@material-ui/icons';
 import useTable from '../../components/useTable';
 import * as employeeService from '../../services/employeeService';
 import Controls from '../../components/Controls/Controls';
-import { Search } from '@material-ui/icons';
+import Popup from '../../components/Popup';
 
 const useStyles = makeStyles(theme => ({
   pageContent: {
@@ -15,6 +17,10 @@ const useStyles = makeStyles(theme => ({
   },
   searchInput: {
     width: '75%'
+  },
+  newButton: {
+    position: 'absolute',
+    right: '10px'
   }
 }));
 
@@ -30,6 +36,7 @@ function Employees() {
   const classes = useStyles();
   const [records, setRecords] = useState(employeeService.getAllEmployees());
   const [filterFn, setFilterFn] = useState({ fn: items => { return items; } });
+  const [openPopup, setOpenPopup] = useState(false);
 
   const {
     TblContainer,
@@ -50,6 +57,13 @@ function Employees() {
     })
   }
 
+  const addOrEdit = (employee, resetForm) => {
+    employeeService.insertEmployee(employee);
+    resetForm();
+    setOpenPopup(false);
+    setRecords(employeeService.getAllEmployees());
+  }
+
   return (
     <div>
       <PageHeader 
@@ -58,7 +72,7 @@ function Employees() {
         icon={<PeopleOutlineTwoToneIcon fontSize="large" />}
       />
       <Paper className={classes.pageContent}>
-        {/* <EmployeeForm /> */}
+        
         <Toolbar>
           <Controls.Input 
             label="Search Employees"
@@ -69,6 +83,13 @@ function Employees() {
               </InputAdornment>)
             }}
             onChange={handleSearch}
+          />
+          <Controls.Button 
+            text="Add New"
+            variant="outlined"
+            startIcon={<AddIcon />}
+            className={classes.newButton}
+            onClick={() => setOpenPopup(true)}
           />
         </Toolbar>
         <TblContainer>
@@ -88,6 +109,15 @@ function Employees() {
         </TblContainer>
         <TblPagination />
       </Paper>
+      <Popup 
+        openPopup={openPopup}
+        setOpenPopup={setOpenPopup}
+        title="Employee Form"
+      >
+        <EmployeeForm 
+          addOrEdit={addOrEdit}
+        />
+      </Popup>
     </div>
   )
 }
