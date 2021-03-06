@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dialog, DialogContent, DialogTitle, makeStyles, Typography } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close'; 
 import Controls from './Controls/Controls';
+import CloseIcon from '@material-ui/icons/Close'; 
 
 const useStyles = makeStyles(theme => ({
   dialogWrapper: {

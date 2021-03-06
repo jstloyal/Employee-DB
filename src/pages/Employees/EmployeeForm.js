@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import { useForm, Form } from '../../components/useForm';
 import Controls from '../../components/Controls/Controls';
@@ -23,7 +23,7 @@ const initialValues = {
 };
 
 function EmployeeForm(props) {
-  const { addOrEdit } = props;
+  const { addOrEdit, recordForEdit } = props;
 
   const validate = (fieldValues = values) => {
     let temp = {...errors};
@@ -58,6 +58,14 @@ function EmployeeForm(props) {
       addOrEdit(values, resetForm);
     }
   }
+
+  useEffect(() => {
+    if (recordForEdit !== null) {
+      setValues({
+        ...recordForEdit
+      })
+    }
+  }, [recordForEdit])
 
   return (
     <Form onSubmit={handleSubmit}>

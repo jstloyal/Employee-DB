@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import Employees from '../pages/Employees/Employees';
 
 const theme = createMuiTheme({
-  pallete: {
+  palette: {
     primary: {
       main: "#333996",
       light: "#3c44b126"
