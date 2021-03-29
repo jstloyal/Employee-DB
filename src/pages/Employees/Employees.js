@@ -11,6 +11,7 @@ import Controls from '../../components/Controls/Controls';
 import Popup from '../../components/Popup';
 import CloseIcon from '@material-ui/icons/Close';
 import EditOutlinedIcon from '@material-ui/icons/EditOutlined';
+import Notification from '../../components/Notification';
 
 const useStyles = makeStyles(theme => ({
   pageContent: {
@@ -40,6 +41,7 @@ function Employees() {
   const [recordForEdit, setRecordForEdit] = useState(null);
   const [filterFn, setFilterFn] = useState({ fn: items => { return items; } });
   const [openPopup, setOpenPopup] = useState(false);
+  const [notify, setNotify] = useState({isOpen: false, message: '', type:'' })
 
   const {
     TblContainer,
@@ -70,6 +72,11 @@ function Employees() {
     setRecordForEdit(null);
     setOpenPopup(false);
     setRecords(employeeService.getAllEmployees());
+    setNotify({
+      isOpen: true,
+      message: 'Submitted Successfully',
+      type: 'success'
+    })
   }
 
   const openInPopup = item => {
@@ -140,6 +147,10 @@ function Employees() {
           recordForEdit={recordForEdit}
         />
       </Popup>
+      <Notification
+        notify={notify}
+        setNotify={setNotify}
+      />
     </div>
   )
 }
